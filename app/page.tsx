@@ -331,7 +331,7 @@ export default function Home() {
               </div>
               <p className="text-sm text-on-surface-variant mb-4">{t("pricing.starterTagline")}</p>
               <ul className="space-y-4 mb-8 flex-grow">
-                {t("pricing.starterItems", { returnObjects: true })
+                {(t("pricing.starterItems", { returnObjects: true }) as string[])
                   .map((item: string, idx: number) => (
                     <li key={idx} className="flex items-center gap-2 text-sm text-on-surface-variant/90">
                       <span className="material-symbols-outlined text-secondary text-sm mt-0.5 transition-transform duration-200 group-hover:scale-110">
@@ -346,7 +346,7 @@ export default function Home() {
                   {t("pricing.starterBonusTitle")}
                 </p>
                 <ul className="space-y-1 text-xs text-on-surface-variant">
-                  {t("pricing.starterBonusItems", { returnObjects: true })
+                  {(t("pricing.starterBonusItems", { returnObjects: true }) as string[])
                     .map((item: string, idx: number) => (
                       <li key={idx} className="flex items-center gap-2">
                         <span className="material-symbols-outlined text-secondary text-xs mt-0.5 transition-transform duration-200 group-hover:scale-110">
@@ -373,7 +373,7 @@ export default function Home() {
               </div>
               <p className="text-sm text-on-surface-variant mb-4">{t("pricing.standardTagline")}</p>
               <ul className="space-y-2 mb-4 flex-grow text-sm text-on-surface-variant">
-                {t("pricing.standardItems", { returnObjects: true })
+                {(t("pricing.standardItems", { returnObjects: true }) as string[])
                   .map((item: string, idx: number) => (
                     <li key={idx} className="flex items-center gap-2">
                       <span className="material-symbols-outlined text-secondary text-sm mt-0.5 transition-transform duration-200 group-hover:scale-110">
@@ -388,7 +388,7 @@ export default function Home() {
                   {t("pricing.standardBonusTitle")}
                 </p>
                 <ul className="space-y-1 text-xs text-on-surface-variant">
-                  {t("pricing.standardBonusItems", { returnObjects: true })
+                  {(t("pricing.standardBonusItems", { returnObjects: true }) as string[])
                       .map((item: string, idx: number) => (
                         <li key={idx} className="flex items-center gap-2">
                         <span className="material-symbols-outlined text-secondary text-xs mt-0.5 transition-transform duration-200 group-hover:scale-110">
@@ -412,7 +412,7 @@ export default function Home() {
               </div>
               <p className="text-sm text-on-surface-variant mb-4">{t("pricing.premiumTagline")}</p>
               <ul className="space-y-2 mb-4 flex-grow text-sm text-on-surface-variant">
-                {t("pricing.premiumItems", { returnObjects: true })
+                {(t("pricing.premiumItems", { returnObjects: true }) as string[])
                   .map((item: string, idx: number) => (
                     <li key={idx} className="flex items-center gap-2">
                       <span className="material-symbols-outlined text-secondary text-sm mt-0.5 transition-transform duration-200 group-hover:scale-110">
@@ -427,7 +427,7 @@ export default function Home() {
                   {t("pricing.premiumBonusTitle")}
                 </p>
                 <ul className="space-y-1 text-xs text-on-surface-variant">
-                  {t("pricing.premiumBonusItems", { returnObjects: true })
+                  {(t("pricing.premiumBonusItems", { returnObjects: true }) as string[])
                       .map((item: string, idx: number) => (
                         <li key={idx} className="flex items-center gap-2">
                         <span className="material-symbols-outlined text-secondary text-xs mt-0.5 transition-transform duration-200 group-hover:scale-110">
