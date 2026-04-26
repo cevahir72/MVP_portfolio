@@ -44,10 +44,11 @@ export default function PortfolioPage() {
         },
         {
           id: 102,
-          title: "Estetik Landing Page Kurgusu",
+            title: "Sağlık ve Güzellik Merkezi",
           label: "Lead Toplama",
           description: "Kampanya, işlem detayları ve WhatsApp yönlendirmesiyle reklam trafiğini sıcak talebe dönüştüren vitrin yapısı.",
           image: "/kuaffor_1.png",
+            demoUrl: "https://hairdresser-demo-two.vercel.app/",
         },
       ],
     },
@@ -60,7 +61,7 @@ export default function PortfolioPage() {
       examples: [
         {
           id: 201,
-          title: "Oto Servis Canlı Demo",
+            title: "Oto Galeri",
           label: "Canlı Yayında",
           description: "Mobil öncelikli acil yardım, hizmet listesi ve hızlı teklif alma modülleriyle çalışan canlı örnek site.",
           image: "/oto_sanayi.png",
@@ -111,6 +112,7 @@ export default function PortfolioPage() {
           label: "Güven İnşası",
           description: "Hekim kadrosu, klinik imkanları ve online randevu formunu aynı akışta toplayan tanıtım sitesi örneği.",
           image: "/petshop_1.png",
+            demoUrl: "https://veteriner-navy.vercel.app/",
         },
         {
           id: 402,
@@ -359,7 +361,7 @@ export default function PortfolioPage() {
                         href={item.demoUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="px-5 py-2 bg-white text-secondary rounded-full font-bold text-xs hover:scale-105 active:scale-95 transition-transform shadow-md"
+                        className="cursor-pointer px-5 py-2 bg-white text-secondary rounded-full font-bold text-xs hover:scale-105 active:scale-95 transition-transform shadow-md"
                       >
                         {item.btnText}
                       </a>
@@ -476,7 +478,7 @@ export default function PortfolioPage() {
                       <button
                         type="button"
                         onClick={() => handleShowcaseClick(activeCategory.title, item)}
-                        className={`rounded-full px-5 py-2 text-xs font-bold transition-transform active:scale-95 ${item.demoUrl ? "bg-secondary text-white hover:scale-105" : "bg-[#0F172A] text-white hover:scale-105"}`}
+                        className={`cursor-pointer rounded-full px-5 py-2 text-xs font-bold transition-transform active:scale-95 ${item.demoUrl ? "bg-secondary text-white hover:scale-105" : "bg-[#0F172A] text-white hover:scale-105"}`}
                       >
                         {item.demoUrl ? "Demoyu Aç" : "Bu Yapıyı İste"}
                       </button>
