@@ -24,6 +24,7 @@ export default function PortfolioPage() {
   const demoLinks = {
     beauty: "https://kuafor-theta.vercel.app/",
     auto: "https://auto-gallery-demo-client.vercel.app/",
+    wedding: "https://wedding-orcin-alpha.vercel.app/",
   };
 
   const categories: Category[] = [
@@ -212,6 +213,23 @@ export default function PortfolioPage() {
           label: "Randevu Talebi",
           description: "Uzmanlık alanları, vaka örnekleri ve toplantı talep formuyla yeni müşteri akışını hızlandıran sayfa.",
           image: "/kurumsal_1.png",
+        },
+      ],
+    },
+    {
+      id: 9,
+      title: "Düğün & Event",
+      summary: "Düğün organizasyonları, etkinlik planlaması ve davetiye tasarımlarıyla unutulmaz anlar yaratır.",
+      img: "/dugun.png",
+      colSpan: "col-span-1 row-span-1 min-h-[200px]",
+      examples: [
+        {
+          id: 901,
+          title: "Düğün Organizasyonu",
+          label: "Canlı Demo",
+          description: "Düğün planlaması, davetiye tasarımı ve etkinlik yönetimi için kapsamlı web sitesi çözümü.",
+          image: "/dugun.png",
+          demoUrl: demoLinks.wedding,
         },
       ],
     },
