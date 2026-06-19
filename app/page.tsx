@@ -9,6 +9,7 @@ import { useTheme } from "../components/ThemeProvider";
 import TrustBar from "../components/TrustBar";
 import FAQ from "../components/FAQ";
 import BlogSection from "../components/BlogSection";
+import CompletedProjects from "../components/CompletedProjects";
 import useScrollAnimation from "./hooks/useScrollAnimation";
 import useAnalytics from "../hooks/useAnalytics";
 
@@ -217,9 +218,6 @@ export default function Home() {
   const toggleMobileMenu = () => setMobileMenuOpen((p) => !p);
   const closeMobileMenu = () => setMobileMenuOpen(false);
 
-  // ── Portfolio filter ──
-  const [activeFilter, setActiveFilter] = useState("all");
-
   // ── Pricing toggle ──
   const [annualBilling, setAnnualBilling] = useState(false);
 
@@ -337,17 +335,6 @@ export default function Home() {
     setFormSubmitted(true);
     track("form_submit", { form_name: "ücretsiz_analiz" });
   };
-
-  const projects = [
-    { name: "Butik Pati", category: "web", result: "Google'da ilk 3'te, aylık 40+ ziyaretçi" },
-    { name: "Kaya Hukuk", category: "web", result: "Kurumsal kimlik + danışmanlık sitesi, mobil uyumlu" },
-    { name: "Demir Oto Sanayi", category: "web", result: "Randevu sistemi entegre, aylık 200+ lead" },
-    { name: "Restoran Lezzet", category: "ads", result: "Google Ads ile aylık 150+ sipariş" },
-    { name: "AI Destek Asistanı", category: "ai", result: "Müşteri temsilcisi yükü %60 azaldı" },
-    { name: "Akıllı Raporlama", category: "ai", result: "Haftalık raporlar otomatik, 5 saat tasarruf" },
-    { name: "Premium Kuaför", category: "ads", result: "Tıklama başı maliyet %35 düştü" },
-    { name: "Yıldız Dershane", category: "ads", result: "Online kayıtlarda %50 artış" },
-  ];
 
   return (
     <main className="pt-24 bg-surface font-body text-on-surface min-h-screen">
@@ -801,109 +788,125 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Portfolio Section */}
-        <section className="bg-bg py-24 px-4 sm:px-6">
-          <div className="max-w-7xl mx-auto">
-            {/* Section header */}
-            <div className="text-center mb-12">
-              <span className="text-accent font-bold text-xs uppercase tracking-[0.15em] font-display">
-                PORTFÖY
-              </span>
-              <h2 className="font-display text-3xl md:text-5xl font-bold text-text mt-3">
-                Tamamlanan Projeler
-              </h2>
-              <p className="text-text-muted mt-3 max-w-xl mx-auto text-base">
-                Her biri dönüşüm odaklı, mobil uyumlu ve SEO hazır olarak teslim edildi.
-              </p>
-            </div>
+        <CompletedProjects />
 
-            {/* Filter Tabs */}
-            <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-10">
+        {/* Stats Bar — Social Proof */}
+        <section className="bg-bg pb-6 px-4 sm:px-6">
+          <div className="max-w-7xl mx-auto">
+            {/* Row 1 — Country distribution */}
+            <div className="flex flex-wrap justify-center gap-3">
               {[
-                { key: "all", label: "Tümü" },
-                { key: "web", label: "Web Sitesi" },
-                { key: "ai", label: "AI Otomasyon" },
-                { key: "ads", label: "Google Ads" },
-              ].map((tab) => (
-                <button
-                  key={tab.key}
-                  onClick={() => setActiveFilter(tab.key)}
-                  className={`px-4 py-2.5 min-h-[44px] rounded-lg text-sm font-medium transition-all duration-200 cursor-pointer flex items-center ${
-                    activeFilter === tab.key
-                      ? "text-accent bg-accent/10 border-b-2 border-accent"
-                      : "text-text-muted hover:text-text bg-bg-card border-b-2 border-transparent hover:border-accent/20"
-                  }`}
+                { flag: "🇹🇷", count: "5", label: "Proje", country: "Türkiye" },
+                { flag: "🇺🇸", count: "3", label: "Proje", country: "ABD" },
+                { flag: "🇩🇪", count: "1", label: "Proje", country: "Almanya" },
+              ].map((item) => (
+                <div
+                  key={item.country}
+                  className="flex items-center gap-2.5 px-4 py-2 rounded-lg"
+                  style={{
+                    background: "rgba(34,211,238,0.06)",
+                    border: "1px solid rgba(34,211,238,0.15)",
+                  }}
                 >
-                  {tab.label}
-                </button>
+                  <span className="text-base leading-none">{item.flag}</span>
+                  <span>
+                    <span className="text-[15px] font-semibold text-text">
+                      {item.count}
+                    </span>
+                    <span className="text-[13px] text-text-muted ml-1">
+                      {item.label} · {item.country}
+                    </span>
+                  </span>
+                </div>
               ))}
             </div>
 
-            {/* Project Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
-              {projects
-                .filter(
-                  (p) => activeFilter === "all" || p.category === activeFilter
-                )
-                .map((project) => (
-                  <div
-                    key={project.name}
-                    className="group bg-bg-card border border-border rounded-2xl overflow-hidden hover:border-accent/30 transition-all duration-300"
-                  >
-                    {/* Image placeholder */}
-                    <div className="relative aspect-[16/9] bg-bg-card overflow-hidden">
-                      <div className="absolute inset-0 flex items-center justify-center transition-transform duration-500 group-hover:scale-105">
-                        <span className="font-display font-bold text-lg md:text-xl text-text/40 text-center px-4 leading-relaxed">
-                          {project.name}
-                        </span>
-                      </div>
-                      <div className="absolute inset-0 bg-gradient-to-t from-bg/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                        <Link
-                          href="/portfolio"
-                          className="px-5 py-3 min-h-[44px] bg-accent text-text rounded-lg font-bold text-sm hover:scale-105 active:scale-95 transition-transform duration-200 flex items-center justify-center"
-                        >
-                          Projeyi İncele
-                        </Link>
-                      </div>
-                    </div>
+            {/* Row 2 — Service distribution */}
+            <div className="flex flex-wrap justify-center gap-3 mt-3">
+              {[
+                { icon: "◈", count: "9", label: "Web Sitesi" },
+                { icon: "⬡", count: "3", label: "Google Ads" },
+                { icon: "◎", count: "2", label: "AI Entegrasyonu" },
+              ].map((item) => (
+                <div
+                  key={item.label}
+                  className="flex items-center gap-2.5 px-4 py-2 rounded-lg"
+                  style={{
+                    background: "rgba(34,211,238,0.06)",
+                    border: "1px solid rgba(34,211,238,0.15)",
+                  }}
+                >
+                  <span className="text-sm text-[#22D3EE] leading-none">{item.icon}</span>
+                  <span>
+                    <span className="text-[15px] font-semibold text-text">
+                      {item.count}
+                    </span>
+                    <span className="text-[13px] text-text-muted ml-1">
+                      {item.label}
+                    </span>
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
-                    {/* Card body */}
-                    <div className="p-5 md:p-6">
-                      <span
-                        className={`inline-block px-2.5 py-0.5 rounded-md text-xs font-semibold tracking-wide ${
-                          project.category === "web"
-                            ? "bg-accent/10 text-accent"
-                            : project.category === "ai"
-                            ? "bg-purple-500/10 text-purple-400"
-                            : "bg-amber-500/10 text-amber-400"
-                        }`}
-                      >
-                        {project.category === "web"
-                          ? "Web Sitesi"
-                          : project.category === "ai"
-                          ? "AI Otomasyon"
-                          : "Google Ads"}
-                      </span>
-                      <h3 className="font-display font-bold text-text text-base md:text-lg mt-3">
-                        {project.name}
-                      </h3>
-                      <p className="text-text-muted text-sm mt-1.5 leading-relaxed">
-                        {project.result}
-                      </p>
+        {/* Portfolio CTA Bridge */}
+        <section
+          className="py-16 px-4 sm:px-6"
+          style={{
+            background: "linear-gradient(180deg, rgba(34,211,238,0.04) 0%, transparent 100%)",
+            borderTop: "1px solid rgba(34,211,238,0.15)",
+          }}
+        >
+          <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-10 md:gap-16 items-center">
+            {/* Left — 60% */}
+            <div className="w-full md:max-w-[60%] text-center md:text-left">
+              <h3 className="font-display text-2xl md:text-3xl font-bold text-text">
+                Sıradaki proje sizin olsun
+              </h3>
+              <p className="text-text-muted text-sm md:text-base mt-3 max-w-xl leading-relaxed">
+                Türkiye, ABD ve Almanya&apos;da işletmeler için çalıştık. Hangi ülkede,
+                hangi sektörde olursanız olun — dijital varlığınızı büyütebiliriz.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 mt-6 justify-center md:justify-start">
+                <button
+                  onClick={scrollToContact}
+                  className="px-6 py-3 min-h-[48px] bg-[#22D3EE] text-[#0F172A] rounded-xl font-bold text-sm hover:shadow-lg hover:shadow-[#22D3EE]/20 hover:scale-[1.02] active:scale-95 transition-all duration-200 cursor-pointer"
+                >
+                  Ücretsiz Analiz Al
+                </button>
+                <button
+                  onClick={handleWhatsAppClick}
+                  className="px-6 py-3 min-h-[48px] bg-transparent border border-[rgba(255,255,255,0.08)] text-text rounded-xl font-semibold text-sm hover:border-[#22D3EE] hover:text-[#22D3EE] hover:-translate-y-0.5 active:scale-95 transition-all duration-200 cursor-pointer"
+                >
+                  WhatsApp&apos;tan Yaz
+                </button>
+              </div>
+            </div>
+
+            {/* Right — 40% mini stat grid */}
+            <div className="w-full md:max-w-[40%]">
+              <div className="grid grid-cols-2 gap-3">
+                {[
+                  { value: "9", label: "projeler" },
+                  { value: "3", label: "ülke" },
+                  { value: "2", label: "AI entegrasyon" },
+                  { value: "14", label: "gün ort. teslimat" },
+                ].map((stat) => (
+                  <div
+                    key={stat.label}
+                    className="bg-[#1E293B] border border-[rgba(255,255,255,0.08)] rounded-xl p-4 text-center hover:border-[#22D3EE]/30 transition-all duration-300"
+                  >
+                    <div className="font-display text-2xl md:text-3xl font-extrabold text-[#22D3EE] tracking-tight">
+                      {stat.value}
+                    </div>
+                    <div className="text-xs text-text-muted mt-0.5 font-medium capitalize">
+                      {stat.label}
                     </div>
                   </div>
                 ))}
-            </div>
-
-            {/* Bottom CTA */}
-            <div className="text-center mt-12">
-              <Link
-                href="/portfolio"
-                className="inline-flex items-center gap-2 bg-bg-card border border-border text-text px-6 py-3 min-h-[48px] rounded-xl font-semibold text-sm hover:bg-bg-card-hover hover:border-accent/40 hover:-translate-y-0.5 transition-all duration-300"
-              >
-                Tüm Projeleri Gör
-                <ArrowUpRight className="w-4 h-4" />
-              </Link>
+              </div>
             </div>
           </div>
         </section>
@@ -1091,7 +1094,7 @@ export default function Home() {
 
         {/* Timeline Section */}
         <section
-          className="bg-bg py-24 px-4 sm:px-6 overflow-hidden"
+          className="bg-bg py-24 px-4 sm:px-6"
           id="process"
         >
           <div className="max-w-6xl mx-auto">
@@ -1109,11 +1112,11 @@ export default function Home() {
 
             {/* Desktop: horizontal */}
             <div className="hidden md:block">
-              <div className="flex items-start gap-0" data-stagger>
+              <div className="flex items-start gap-0">
                 {steps.map((step, i) => (
                   <div
                     key={step.title}
-                    className="flex-1 group fade-up"
+                    className="flex-1 group"
                   >
                     {/* Circle + connector line */}
                     <div className="flex items-center mb-5">
@@ -1144,12 +1147,12 @@ export default function Home() {
 
             {/* Mobile: vertical */}
             <div className="md:hidden">
-              <div className="relative pl-10" data-stagger>
+              <div className="relative pl-10">
                 <div className="absolute left-[15px] top-3 bottom-3 w-0.5 bg-bg-card-hover" />
                 {steps.map((step, i) => (
                   <div
                     key={step.title}
-                    className="relative pb-8 last:pb-0 fade-up"
+                    className="relative pb-8 last:pb-0"
                   >
                     <div className="absolute -left-10 top-0 w-8 h-8 rounded-full flex items-center justify-center font-display font-bold text-xs border bg-accent/20 border-accent/40 text-accent">
                       {i + 1}
